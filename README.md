@@ -9,64 +9,64 @@ featuring a 7-segment display, LEDs, and buttons.
 1. Internal (Private) Functions
 
 send_byte(data)
-    - Sends a byte to the TM1638, bit by bit, using the clock (_clk) and data (_dio) GPIO pins.
-    - Required for the bit-banged serial communication with the module.
+- Sends a byte to the TM1638, bit by bit, using the clock (_clk) and data (_dio) GPIO pins.
+- Required for the bit-banged serial communication with the module.
 
 command(cmd)
-    - Sends a command to the TM1638 by toggling the STB pin before and after transmission.
-    - Used for all control operations (brightness, power on/off, etc.).
+- Sends a command to the TM1638 by toggling the STB pin before and after transmission.
+- Used for all control operations (brightness, power on/off, etc.).
 
 update()
-    - Updates the display and LEDs by sending the contents of _segments and _led_state buffers.
-    - Synchronizes software state with the hardware module.
+- Updates the display and LEDs by sending the contents of _segments and _led_state buffers.
+- Synchronizes software state with the hardware module.
 
 encode_char(c)
-    - Converts characters ('0'-'9', 'A'-'Z', 'a'-'z', space, '-', '*') into 7-segment codes.
-    - Enables text display on the 7-segment module.
+- Converts characters ('0'-'9', 'A'-'Z', 'a'-'z', space, '-', '*') into 7-segment codes.
+- Enables text display on the 7-segment module.
 
 read_byte()
-    - Reads a byte sent from the TM1638 via the data pin.
-    - Serves as the basis for button state reading.
+- Reads a byte sent from the TM1638 via the data pin.
+- Serves as the basis for button state reading.
 
 read_keys()
-    - Reads and returns a bitmask representing pressed buttons.
-    - Aggregates multiple byte reads into a single mask.
+- Reads and returns a bitmask representing pressed buttons.
+- Aggregates multiple byte reads into a single mask.
 
 2. Public Functions (API)
 
 tm1638_init(brightness)
-    - Initializes GPIO pins, clears display memory, and sets brightness (0-7).
-    - Must be called before any other library functions.
+- Initializes GPIO pins, clears display memory, and sets brightness (0-7).
+- Must be called before any other library functions.
 
 tm1638_clear()
-    - Clears the display and turns off all LEDs.
-    - Ideal to start fresh on the module.
+- Clears the display and turns off all LEDs.
+- Ideal to start fresh on the module.
 
 tm1638_show_string(string, pos)
-    - Displays a string starting at position pos (0-7).
-    - Converts and loads characters into the segment buffer.
+- Displays a string starting at position pos (0-7).
+- Converts and loads characters into the segment buffer.
 
 tm1638_set_power(on)
-    - Turns the display on (true) or off (false).
-    - Controls visibility without losing buffer data.
+- Turns the display on (true) or off (false).
+- Controls visibility without losing buffer data.
 
 tm1638_set_brightness(brightness)
-    - Adjusts the display brightness (0-7) at runtime.
+- Adjusts the display brightness (0-7) at runtime.
 
 tm1638_set_led(pos, on)
-    - Turns an individual LED on or off at position pos (0-7).
+- Turns an individual LED on or off at position pos (0-7).
 
 tm1638_set_leds(leds)
-    - Sets the state of all LEDs using an array of 8 values.
+- Sets the state of all LEDs using an array of 8 values.
 
 tm1638_set_leds_mask(mask)
-    - Controls all LEDs using an 8-bit binary mask.
+- Controls all LEDs using an 8-bit binary mask.
 
 tm1638_read_keys_mask()
-    - Reads button states and returns an 8-bit mask (higher bits = buttons on the right).
-    
+- Reads button states and returns an 8-bit mask (higher bits = buttons on the right).
+
 tm1638_get_keys(key)
-    - Reads button states and fills key[8] array with 1 (pressed) or 0 (not pressed).
+- Reads button states and fills key[8] array with 1 (pressed) or 0 (not pressed).
 
 3. Strategies and Observations
 
