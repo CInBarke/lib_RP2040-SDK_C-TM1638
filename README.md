@@ -6,7 +6,7 @@ TM1638 library for RP2040 using SDK-C/C++
 This library was created to control modules based on the TM1638 chip,
 featuring a 7-segment display, LEDs, and buttons.
 
-1. Internal (Private) Functions
+1 - Internal (Private) Functions
   
   send_byte(data)
   - Sends a byte to the TM1638, bit by bit, using the clock (_clk) and data (_dio) GPIO pins.
@@ -32,7 +32,7 @@ featuring a 7-segment display, LEDs, and buttons.
   - Reads and returns a bitmask representing pressed buttons.
   - Aggregates multiple byte reads into a single mask.
   
-  2. Public Functions (API)
+  2 - Public Functions (API)
   
   tm1638_init(brightness)
   - Initializes GPIO pins, clears display memory, and sets brightness (0-7).
@@ -68,7 +68,7 @@ featuring a 7-segment display, LEDs, and buttons.
   tm1638_get_keys(key)
   - Reads button states and fills key[8] array with 1 (pressed) or 0 (not pressed).
   
-  3. Strategies and Observations
+  3 - Strategies and Observations
   
   - Unified buffer: Maintains _segments and _led_state in RAM and updates the module via update().
   - Encoding table: _COD[] translates ASCII characters into segment codes.
